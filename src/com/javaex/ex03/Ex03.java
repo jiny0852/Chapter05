@@ -32,12 +32,13 @@ public class Ex03 {
 			
 			String[] re = str.split("#");
 			
-			Person p = new Person();
+			Person p = new Person(re[0], re[1], re[2]);
 			
+			/*
 			p.setName(re[0]);
 			p.setHp(re[1]);
 			p.setCompany(re[2]);
-			
+			*/
 			sList.add(p);
 			
 			//p.showInfo();
