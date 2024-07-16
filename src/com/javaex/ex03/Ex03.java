@@ -45,6 +45,10 @@ public class Ex03 {
 			
 		}	
 		
+		for(int i = 0; i < sList.size();i++) {
+			sList.get(i).showInfo();
+		}
+		
 		
 		for (Person info : sList) {
 			info.showInfo();
