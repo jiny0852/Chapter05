@@ -1,6 +1,8 @@
 package com.javaex.ex04;
 
 public class Person {
+	
+	static int countUser = 1;
 
 	private String name;
 	private String hp;
@@ -8,12 +10,14 @@ public class Person {
 	
 	
 	public Person() {
+		countUser++;
 	}
 	public Person(String name, String hp, String company) {
 		super();
 		this.name = name;
 		this.hp = hp;
 		this.company = company;
+		countUser++;
 	}
 	
 	
@@ -44,9 +48,8 @@ public class Person {
 		return "Person [name=" + name + ", hp=" + hp + ", company=" + company + "]";
 	}
 	public void showInfo() {
-		System.out.println("----------------");
-		System.out.println("이름: " + name + "\n전화: " + hp + "\n회사: " + company);
-		System.out.println("----------------");
+		System.out.println(countUser + ".  이름: " + name + "\n전화: " + hp + "\n회사: " + company);
+		
 	}
 	
 	

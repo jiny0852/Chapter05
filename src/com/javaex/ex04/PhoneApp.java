@@ -17,86 +17,127 @@ import com.javaex.ex03.Person;
 
 public class PhoneApp {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {//, IndexOutOfBoundsException {
 		
 		//읽기 스트림
 		InputStream fr = new FileInputStream("C:\\javaStudy\\PhoneDB.txt");
-		InputStreamReader isr = new InputStreamReader(fr, "MS949");
+		InputStreamReader isr = new InputStreamReader(fr, "UTF-8");
 		BufferedReader br  = new BufferedReader(isr);
 		
 		//쓰기 스트림
-		OutputStream out = new FileOutputStream("C:\\javaStudy\\PhoneDB.txt");
+		OutputStream out = new FileOutputStream("C:\\javaStudy\\PhoneDBv2.txt");
 		OutputStreamWriter osw = new OutputStreamWriter(out, "MS949");
 		BufferedWriter bw = new BufferedWriter(osw);
 		
 		Scanner sc = new Scanner(System.in);
+		
+		//리스트 업데이트
 		List<Person> pList = new ArrayList<Person>();
-				
-		System.out.println("메뉴 선택");
-		System.out.println("1. PhoneDB 정보 출력\n2. PhoneDB 정보 입력\n3.프로그램 종료");
-		int processOn = sc.nextInt();
 		
-		switch (processOn) {
+
 		
+		System.out.println("============================");
+		System.out.println("=======주소록 관리 프로그램=======");
+		System.out.println("============================");
 		
-			case 1: //정보 출력
-				System.out.println("PhoneDB의 내용입니다.");
-				
-				while (true) {
+		boolean processOn = true;
+		
+		while (processOn) {
+			
+			System.out.println("1. 리스트 2. 등록 3. 삭제 4. 검색 5.종료");
+			System.out.println("---------------------------------------");
+			System.out.print("> 메뉴번호 : ");
+			int processNum = sc.nextInt();
+			
+			switch (processNum) {
+			
+			
+				case 1: //데이터 출력
 					
-					String str = br.readLine(); 
+					System.out.println("<1. 리스트>");
 					
-					if (str == null) {
-						System.out.println("파일 읽기 끝");
-						break;
+					while (true) {
+						
+						String str = br.readLine(); 
+					
+						if (str == null) {
+							//System.out.println("파일 읽기 끝");
+							break;
+						}
+					
+						String[] re = str.split(",");
+					
+						pList.add(new Person(re[0], re[1], re[2]));
+					
 					}
 					
-					String[] re = str.split(",");
+					for (Person info : pList) {
+						info.showInfo();
+					}
 					
-					Person p = new Person(re[0], re[1], re[2]);
-					
-					bw.write(str);
-					bw.newLine();
-					
-				}	
+					break;
 				
 			
-			case 2: //정보 입력
-				System.out.println("PhoneDB에 정보를 입력합니다.");
-				
-				while (true) {
+				case 2: //데이터 입력
 					
+					System.out.println("<2. 등록>");
+				
 					System.out.println("정보를 입력하세요");
 					System.out.print(">> ");
 						
-					String enter3 = sc.nextLine();
+					String enterStr = sc.nextLine();
 						
-					if ( enter3.equals("q") ) {
-						break;
-					}
+					String[] re = enterStr.split(",");
+					
+					pList.add(new Person(re[0], re[1], re[2]));	
+					
+					/*
+					Person p = new Person();
+						
+						
+						p.setName(re[0]);
+						p.setHp(re[1]);
+						p.setCompany(re[2]);
+						
+						pList.add(p);
+						
+						
+					*/
 					
 					
-				}
+					
+					break;
 				
 				
+				case 3: //데이터 삭제
+					
+					System.out.println("<3. 삭제>");
+					
+				case 4: //데이터 검색
+					
+					System.out.println("<4. 검색>");
+					
+				case 5: //프로그램 종료
+					
+					System.out.println("5. 프로그램을 종료합니다");
+					processOn = false;
+					break;
 				
-				
-				
-			case 3:
-				System.out.println("프로그램을 종료합니다");
-				break;
-				
-			default:
-				System.out.println("잘못된 입력입니다");
-				break;
+				default:
+					System.out.println("잘못된 입력입니다");
+					break;
 		
+			}
+			
+			
+			
+			
+			
 		}
 		
-		
-		
-		
-		
-		
+		System.out.println("============================");
+		System.out.println("=========프로그램  종료=========");
+		System.out.println("============================");
 		
 		
 		
